@@ -29,42 +29,59 @@ Key learning objectives:
 ##  Lab Architecture  
 
 **Components:**  
-- **DC-1 (Domain Controller):** Hosts Active Directory, enforces Group Policies.  
-- **Client-1 (Workstation):** Domain-joined Windows 10 VM used for testing account lockouts.  
-- **Domain Users:** Standard accounts created in `_EMPLOYEES` OU.  
+- **DC-1 (Domain Controller):** Hosts Active Directory, enforces Group Policies 
+- **Client-1 (Workstation):** Domain-joined Windows 10 VM used for testing account lockouts
+- **Domain Users:** Standard accounts created in `_EMPLOYEES` OU 
 
 ---
 
 ##  Step-by-Step Implementation  
 
-### 🔹 1. Simulate an Account Lockout  
- 
-- Log into `DC-1` via Remote Desktop.  
-- In **ADUC**, identify a standard user account (e.g., `User5`).  
-- On `Client-1`, attempt to log in with the selected account using an incorrect password.  
-- Repeat **10 times** to simulate failed logins.  
 
-📸 Screenshot Example:  
-![Failed Logins](https://via.placeholder.com/600x300?text=Failed+Login+Attempts)  
+### 1. Getting Started 
+
+- Log into `DC-1` via Remote Desktop as an admin (e.g., `mydomain.com\jane_admin`) 
+- In **ADUC**, identify a Domain user account that will be used as the test subject (e.g., `dapo.dog`).
+
+![AD domain user sub ](https://github.com/user-attachments/assets/abee7c39-4094-4324-bd57-25e0049bdb4f)
 
 ---
 
-### 🔹 2. Configure Account Lockout Threshold via Group Policy  
-  
-- On `DC-1`, open **Group Policy Management Console (GPMC)**.  
+### 2. Configure Account Lockout Threshold via Group Policy  
+
+
+- On `DC-1`, open **Group Policy Management Console**: Start → Run → `gpmc.msc`
+
+
+![AD run GPMC](https://github.com/user-attachments/assets/2a09aa0e-5c95-4903-bf46-a37e2d51d720)
+
+
 - Edit the **Default Domain Policy**.  
 - Navigate to:  
   - `Computer Configuration → Windows Settings → Security Settings → Account Policies → Account Lockout Policy`  
+
+
+![AD default domain services](https://github.com/user-attachments/assets/1b3c61e8-df74-4d29-abac-e3313f63ed0f)
+
+
 - Configure the following settings:  
   - **Account lockout threshold:** 5 invalid attempts  
   - **Account lockout duration:** 30 minutes  
-  - **Reset account lockout counter after:** 30 minutes  
-- Apply the policy and force an update with:  
-  ```powershell
-  gpupdate /force
-📸 Screenshot Example:
+  - **Reset account lockout counter after:** 10 minutes  
 
-### 🔹 3. Test the Lockout Policy  
+
+![AD edit default domain services ](https://github.com/user-attachments/assets/600b51b9-7941-4297-8037-617b898d21d0)
+
+
+- Apply the policy and force an update with:  
+  - On a client machine or server, open Command Prompt and type `gpupdate /force` then press     Enter.
+
+![AD gpupdate](https://github.com/user-attachments/assets/739c7da3-6e7e-4d6e-8e1b-864ceffab457)
+
+
+---
+
+### 3. Test the Lockout Policy  
 
   
 - On `Client-1`, attempt to log in as the same user with an incorrect password **6 times**.  
@@ -76,7 +93,7 @@ Key learning objectives:
 
 ---
 
-### 🔹 4. Unlock and Reset Account Password  
+### 4. Unlock and Reset Account Password  
 
   
 - On `DC-1`, open **ADUC**.  
@@ -89,7 +106,7 @@ Key learning objectives:
 
 ---
 
-### 🔹 5. Disable and Re-enable Accounts  
+### 5. Disable and Re-enable Accounts  
 
   
 - On `DC-1`, right-click the same user → **Disable Account**.  
@@ -102,7 +119,7 @@ Key learning objectives:
 
 ---
 
-### 🔹 6. Review Security Logs  
+### 6. Review Security Logs  
 
   
 - On `DC-1`, open **Event Viewer**.  
