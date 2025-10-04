@@ -121,13 +121,24 @@ Key learning objectives:
 ### 5. Disable and Re-enable Accounts  
 
   
-- On `DC-1`, right-click the same user → **Disable Account**.  
-- On `Client-1`, attempt to log in with the disabled account → observe the error message stating the account is disabled.  
-- Re-enable the account in **ADUC**.  
+- On `DC-1`, right-click the same user (`dapo.dog`) → **Disable Account**  
+- On `Client-1`, attempt to log in with the disabled account → observe the error message stating the account is disabled
+
+
+![AD sub account disabled](https://github.com/user-attachments/assets/db4ae534-2014-49b8-8e05-b8d2fec54e8f)
+
+![AD sub confirmed disabled](https://github.com/user-attachments/assets/5b66ead7-0d98-4702-a8d1-eb46db9f0e29)
+
+
+- Re-enable the account in **ADUC**, right-click (`dapo.dog`) → **Enable Account**
 - Retry login → confirm access is restored.  
 
-📸 Screenshot Example:  
-![Account Disabled](https://via.placeholder.com/600x300?text=Account+Disabled)  
+![AD sub account enabled](https://github.com/user-attachments/assets/181a8ee0-f9ec-4c42-b242-b79151a919ca)
+
+![AD sub enabled comfirm](https://github.com/user-attachments/assets/2a0af984-d41d-4222-9daa-7133216c6683)
+
+![AD sub success login again](https://github.com/user-attachments/assets/3e318d01-76f9-402d-9ee5-45b026664a91)
+
 
 ---
 
@@ -135,23 +146,28 @@ Key learning objectives:
 
   
 - On `DC-1`, open **Event Viewer**.  
-- Navigate to: `Windows Logs → Security`.  
-- Filter for **Audit Failure** and **Audit Success** events related to logons.  
-- On `Client-1`, open **Event Viewer**.  
-- Navigate to: `Windows Logs → Security`.  
-- Observe failed login attempts and lockout messages from the client side.  
+- Navigate to: `Windows Logs → Security`  
+- Filter for **Audit Failure** and **Audit Success** events related to logons  
 
-📸 Screenshot Example:  
-![Event Viewer Logs](https://via.placeholder.com/600x300?text=Security+Logs)  
+![AD dc-1 observe log](https://github.com/user-attachments/assets/7cae28fc-4d82-418d-9c95-1bb9508eddd7)
+
+
+- On `Client-1`, open **Event Viewer** as an Admin (`mydomain.com\jane_admin`)
+- Navigate to: `Windows Logs → Security`  
+- Observe failed login attempts and lockout messages from the client side  
+
+![AD client-1 observe logs](https://github.com/user-attachments/assets/0184ed0f-3c14-4bf5-b254-c557db35c7e5)
+
 
 ---
 
 ##  Outcome / Learnings  
 
-By completing this lab, I practiced:  
-- Configuring and enforcing account lockout policies via Group Policy.  
-- Simulating failed logins to test security controls.  
-- Unlocking, resetting, disabling, and re-enabling Active Directory user accounts.  
-- Analyzing security event logs on both Domain Controllers and clients.  
+**By completing this lab, I practiced:**  
 
-This project demonstrates my ability to implement **account security policies** and handle common Active Directory support tasks such as lockouts, account resets, and security auditing.  
+- Configuring and enforcing account lockout policies via Group Policy
+- Simulating failed logins to test security controls
+- Unlocking, resetting, disabling, and re-enabling Active Directory user accounts 
+- Analyzing security event logs on both Domain Controllers and clients 
+
+**This project demonstrates my ability to implement **account security policies** and handle common Active Directory support tasks such as lockouts, account resets, and security auditing.**
